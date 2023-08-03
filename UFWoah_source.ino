@@ -1,11 +1,13 @@
-
+// Tatiana Vassiliev
+// 5/15/2023
 #include <FastLED.h>
 #include "SoftwareSerial.h"
 #include "DFRobotDFPlayerMini.h"
 #define NUM_LEDS 110
 #define DATA_PIN 2
 #define CLOCK_PIN 13
-// constants won't change. They're used here to set pin numbers:
+
+// initialize and declare variables
 int sensorPin = A0;
 const int buttonPin1 = 3;
 const int buttonPin2 = 4;
@@ -14,10 +16,10 @@ const int buttonPin4 = 6;
 const int buttonPin5 = 7;
 const int buttonPin6 = 8;
 const int buttonPin7 = 9;
-const int ledPin = 2;    // the number of the LED pin
+const int ledPin = 2;    
 CRGB leds[NUM_LEDS];
-SoftwareSerial mySoftwareSerial(11, 10);                    // Recieve Pin (RX), Transmit Pin (TX)
-DFRobotDFPlayerMini myDFPlayer;                           // Create myDFPlayer of the DFPlayer Class
+SoftwareSerial mySoftwareSerial(11, 10);               
+DFRobotDFPlayerMini myDFPlayer;                    
 int buttonState1 = 0;
 int buttonState2 = 0;
 int buttonState3 = 0;
@@ -37,15 +39,14 @@ int sensorValue = 0;
 float current_time = 0;
 float past_time = 0;
 
-
-
-
+// clear all LEDs
 void clearLed(int ledId) 
 {
 	leds[ledId] = CRGB(0, 0, 0);
   FastLED.show();
 }
 
+// light up the LEDs associated with a button depending on what button is pressed
 void light(int button) 
 {
   // turn LED on:
@@ -189,11 +190,13 @@ void light(int button)
   }
 }
 
+// play audio files
 void playAudio(int s) 
 {
   myDFPlayer.play(s);
 }
 
+// generate a new button once a button has been pressed
 int generate(int change, int buttonOne, int buttonTwo)
 {
   if (change == 1)
@@ -222,12 +225,13 @@ int generate(int change, int buttonOne, int buttonTwo)
   }
 }
 
+//check if a pressed button is being correctly or incorrectly pressed
 void check(int button)
 {
   if (button == safe)
   {
   }
-  else if (button == button_one)
+  else if (button == button_one) // if the button is correctly pressed, flash the corresponding LEDs white
   {
     past_time =millis();
     playAudio(3);
@@ -236,11 +240,11 @@ void check(int button)
     {
       clearLed(108);
       for (int i = 0; i < 11; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
       for (int i = 0; i < 11; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       leds[i] = CRGB(255,255,255);
       }
       leds[108]=CRGB(255,255,255);
@@ -248,92 +252,92 @@ void check(int button)
       delay(100);
       clearLed(108);
       for (int i = 0; i < 11; i++) 
-      {                           // Turn the LEDs off before starting
+      {                          
       clearLed(i);
       }
     }
     else if (button == 2)
     {
       for (int i = 16; i < 29; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
       for (int i = 16; i < 29; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       leds[i] = CRGB(255,255,255);
       }
       FastLED.show();
       delay(100);
       for (int i = 16; i < 29; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
     }
     else if (button == 3)
     {
       for (int i = 34; i < 48; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
       for (int i = 34; i < 48; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       leds[i] = CRGB(255,255,255);
       }
       FastLED.show();
       delay(100);
       for (int i = 34; i < 48; i++) 
-      {                           // Turn the LEDs off before starting
+      {                          
       clearLed(i);
       }
     }
     else if (button == 4)
     {
       for (int i = 53; i < 66; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
       for (int i = 53; i < 66; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       leds[i] = CRGB(255,255,255);
       }
       FastLED.show();
       delay(100);
       for (int i = 53; i < 66; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
     }
     else if (button == 5)
     {
       for (int i = 71; i < 84; i++) 
-      {                           // Turn the LEDs off before starting
+      {                          
       clearLed(i);
       }
       for (int i = 71; i < 84; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       leds[i] = CRGB(255,255,255);
       }
       FastLED.show();
       delay(100);
       for (int i = 71; i < 84; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
     }
     else if (button == 6)
     {
       for (int i = 89; i < 102; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
       for (int i = 89; i < 102; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       leds[i] = CRGB(255,255,255);
       }
       FastLED.show();
       delay(100);
       for (int i = 89; i < 102; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
     }
@@ -350,11 +354,11 @@ void check(int button)
     {
       clearLed(108);
       for (int i = 0; i < 11; i++) 
-      {                           // Turn the LEDs off before starting
+      {                          
       clearLed(i);
       }
       for (int i = 0; i < 11; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       leds[i] = CRGB(255,255,255);
       }
       leds[108]=CRGB(255,255,255);
@@ -362,92 +366,92 @@ void check(int button)
       delay(100);
       clearLed(108);
       for (int i = 0; i < 11; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
     }
     else if (button == 2)
     {
       for (int i = 16; i < 29; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
       for (int i = 16; i < 29; i++) 
-      {                           // Turn the LEDs off before starting
+      {                          
       leds[i] = CRGB(255,255,255);
       }
       FastLED.show();
       delay(100);
       for (int i = 16; i < 29; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
     }
     else if (button == 3)
     {
       for (int i = 34; i < 48; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
       for (int i = 34; i < 48; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       leds[i] = CRGB(255,255,255);
       }
       FastLED.show();
       delay(100);
       for (int i = 34; i < 48; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
     }
     else if (button == 4)
     {
       for (int i = 53; i < 66; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
       for (int i = 53; i < 66; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       leds[i] = CRGB(255,255,255);
       }
       FastLED.show();
       delay(100);
       for (int i = 53; i < 66; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
     }
     else if (button == 5)
     {
       for (int i = 71; i < 84; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
       for (int i = 71; i < 84; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       leds[i] = CRGB(255,255,255);
       }
       FastLED.show();
       delay(100);
       for (int i = 71; i < 84; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
     }
     else if (button == 6)
     {
       for (int i = 89; i < 102; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
       for (int i = 89; i < 102; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       leds[i] = CRGB(255,255,255);
       }
       FastLED.show();
       delay(100);
       for (int i = 89; i < 102; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
     }
@@ -455,17 +459,17 @@ void check(int button)
     button_two_past = button_two;
     button_two = 0;
   }
-  else
+  else	// if the button pressed is incorrect, flash the corresponding LEDs red
   {
     if (button == 1)
     {
       clearLed(108);
       for (int i = 0; i < 11; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
       for (int i = 0; i < 11; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       leds[i] = CRGB(255,0,0);
       }
       leds[108]=CRGB(255,0,0);
@@ -473,102 +477,102 @@ void check(int button)
       delay(100);
       clearLed(108);
       for (int i = 0; i < 11; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
     }
     else if (button == 2)
     {
       for (int i = 16; i < 29; i++) 
-      {                           // Turn the LEDs off before starting
+      {                          
       clearLed(i);
       }
       for (int i = 16; i < 29; i++) 
-      {                           // Turn the LEDs off before starting
+      {                          
       leds[i] = CRGB(255,0,0);
       }
       FastLED.show();
       delay(100);
       for (int i = 16; i < 29; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
     }
     else if (button == 3)
     {
       for (int i = 34; i < 48; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
       for (int i = 34; i < 48; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       leds[i] = CRGB(255,0,0);
       }
       FastLED.show();
       delay(100);
       for (int i = 34; i < 48; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
     }
     else if (button == 4)
     {
       for (int i = 53; i < 66; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
       for (int i = 53; i < 66; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       leds[i] = CRGB(255,0,0);
       }
       FastLED.show();
       delay(100);
       for (int i = 53; i < 66; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
     }
     else if (button == 5)
     {
       for (int i = 71; i < 84; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
       for (int i = 71; i < 84; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       leds[i] = CRGB(255,0,0);
       }
       FastLED.show();
       delay(100);
       for (int i = 71; i < 84; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
     }
     else if (button == 6)
     {
       for (int i = 89; i < 102; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
       for (int i = 89; i < 102; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       leds[i] = CRGB(255,0,0);
       }
       FastLED.show();
       delay(100);
       for (int i = 89; i < 102; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
       clearLed(i);
       }
     }
     clearLed(108);
     for (int i = 0; i < 108; i++) 
-    {                           // Turn the LEDs off before starting
+    {                           
     clearLed(i);
     }
     for (int i = 0; i < 109; i++) 
-    {                           // Turn the LEDs off before starting
+    {                           
       leds[i] = CRGB(255,0,0);
       FastLED.show();
     }
@@ -576,6 +580,7 @@ void check(int button)
   }
 }
 
+// play audio files for the score
 void playScoreSound(int s) 
 {
   if (s < 20) 
@@ -597,6 +602,7 @@ void playScoreSound(int s)
   } 
 }
 
+// calibrate the gyroscope, turn on serial monitor, and intitiate starting sequence
 void setup() {
   int i;
   float sum=0;
@@ -625,24 +631,21 @@ void setup() {
   pinMode(buttonPin5, INPUT_PULLUP);
   pinMode(buttonPin6, INPUT_PULLUP);
   for (int i = 0; i < 110; i++) 
-  {                           // Turn the LEDs off before starting
+  {                           
     clearLed(i);
   }
-  mySoftwareSerial.begin(9600);                           // Initiate communication with the DFPlayer
-  Serial.begin(115200);                                   // Mostly used for debugging
+  mySoftwareSerial.begin(9600);                          
+  Serial.begin(115200);                                   
   delay(1000);
-  if (!myDFPlayer.begin(mySoftwareSerial, true, false)) {              // Use softwareSerial to communicate with mp3. If we have trouble,
-    Serial.println(F("Unable to begin:"));                // print to the serial monitor so we can see.
+  if (!myDFPlayer.begin(mySoftwareSerial, true, false)) {              
+    Serial.println(F("Unable to begin:"));               
     Serial.println(F("1.Please recheck the connection!"));
     Serial.println(F("2.Please insert the SD card!"));
   } else {
     Serial.println(F("DFPlayer Mini online."));          
   }
-  myDFPlayer.volume(30);                                   // Set volume value. From 0 to 30
-  //playAudio(1);       
-  //playAudio(2);
-  //playAudio(3); 
-  playAudio(42);                                    // Play the first mp3! Exciting stuff                                         // This delay and digital write is timed to turn each light on and off                                        // We're all set with this state. Let's set the state to 1 to start the sequence playing
+  myDFPlayer.volume(30); // set the volume level                                  
+  playAudio(42);                                    
   light(1);
   light(2);
   light(3);
@@ -660,7 +663,7 @@ void loop()
   buttonState4 = digitalRead(buttonPin4);
   buttonState5 = digitalRead(buttonPin5);
   buttonState6 = digitalRead(buttonPin6);
-  if (game_state ==1)
+  if (game_state ==1) // begin the game, make sure it marks the buttons that are currently stood on as safe
   {
     score = 0;
     button_one = 0;
@@ -704,13 +707,13 @@ void loop()
     {
       clearLed(108);
       for (int i = 0; i < 108; i++) 
-      {                           // Turn the LEDs off before starting
+      {                           
         clearLed(i);
       }
       past_time=millis();
     }
   }
-  else if (game_state == 2)
+  else if (game_state == 2) // game is active, constantly check the states of the buttons
   {
     current_time = millis();
     if (button_one ==7 || button_two == 7)
@@ -780,7 +783,7 @@ void loop()
       }
     }
   }
-  else if (game_state == 3)
+  else if (game_state == 3) // play the final score and reset the game
   {
     playAudio(10);
     delay(3500);
@@ -798,11 +801,11 @@ void loop()
     light(5);
     light(6);
   }
-  else if (game_state == 4)
+  else if (game_state == 4) // check if the toy is twisting or not
   {
     double angularVelocity;
     sensorValue = analogRead(sensorPin);
-    angularVelocity =((double)(sensorValue-reference_Value)*4930.0)/1023.0/0.67; //get the angular velocity
+    angularVelocity =((double)(sensorValue-reference_Value)*4930.0)/1023.0/0.67; 
     Serial.println(angularVelocity);
     if (((abs(angularVelocity)) > 400) && ((abs(angularVelocity)) < 1000))
     {
