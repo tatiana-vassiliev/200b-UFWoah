@@ -654,6 +654,7 @@ void setup() {
   light(6);
 }
 
+//once setup is complete, remain in the loop for all of gameplay
 void loop() 
 {
   // read the state of the pushbutton value:
